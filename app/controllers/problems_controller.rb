@@ -13,7 +13,7 @@ class ProblemsController < ApplicationController
   private
 
   def get_problem
-    @problem = Problem.find_by number: params[:number]
+    @problem = GauranteedProblem.find_by number: params[:number]
   end
 
 end
