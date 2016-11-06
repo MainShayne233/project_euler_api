@@ -17,4 +17,4 @@
 .byebug_history
 
 vendor/
-.DS_Store
+*.DS_Store

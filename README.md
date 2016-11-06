@@ -4,7 +4,7 @@ Lets you can programmatically check your solutions!
 ## Not complete!
 This API does not use Project Euler's backend, so it needs solution contributions!
 
-The currently known solutions are in ```data/solutions.txt```. If you have a solution to add,
+The currently known solutions are in ```app/data/solutions.txt```. If you have a solution to add,
 please fork this repo, add it to the list, and make a pull request!
 
 Here is a guide on how to fork and make a pull request: https://www.digitalocean.com/community/tutorials/how-to-create-a-pull-request-on-github
