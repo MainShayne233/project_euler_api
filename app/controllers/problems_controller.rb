@@ -3,11 +3,7 @@ class ProblemsController < ApplicationController
   before_action :get_problem, only: :check
 
   def check
-    render json: {
-      status: 200,
-      result: @problem.attempt_result(params[:solution]),
-      error: nil
-    }
+    render json: @problem.result_for(solution: params["solution"])
   end
 
   def github

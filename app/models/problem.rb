@@ -16,21 +16,22 @@ class Problem < ApplicationRecord
     problem.update_attributes params
   end
 
+  def self.find_by(number:)
+    super(number: number) || MissingProblem.new(number: number)
+  end
+
+
   def correct?(solution)
     self.solution == solution
   end
 
-  def attempt_result(solution)
+  def result_for(solution:)
     attempts.create solution: solution
-    correct?(solution) ? "correct" : "incorrect"
-  end
-
-  def correct_attempts
-    attempts.where solution: solution
-  end
-
-  def incorrect_attempts
-    attempts.where.not solution: solution
+    return {
+      status: 200,
+      result: correct?(solution) ? "correct" : "incorrect",
+      error: nil
+    }
   end
 
 end
