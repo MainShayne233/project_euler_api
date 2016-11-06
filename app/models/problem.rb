@@ -11,7 +11,7 @@ class Problem < ApplicationRecord
         .each   { |params|  Problem.create_or_update(params)          }
   end
 
-  def create_or_update(params)
+  def self.create_or_update(params)
     problem = Problem.find_by(number: params[:number]) || Problem.create
     problem.update_attributes params
   end
