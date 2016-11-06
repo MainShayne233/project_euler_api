@@ -12,12 +12,16 @@ class Problem < ApplicationRecord
   end
 
   def self.create_or_update(params)
-    problem = Problem.find_by(number: params[:number]) || Problem.create
+    problem = Problem.find_by(number: params[:number], missing_problems: false)
     problem.update_attributes params
   end
 
-  def self.find_by(number:)
-    super(number: number) || MissingProblem.new(number: number)
+  def self.find_by(number:, missing_problems:)
+    if missing_problems
+      super(number: number) || MissingProblem.new(number: number)
+    else
+      super(number: number)
+    end
   end
 
 
