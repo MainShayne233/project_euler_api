@@ -1,24 +1,63 @@
-# README
+# ProjectEulerAPI
+Lets you can programmatically check your solutions!
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Not complete!
+This API does not use Project Euler's backend, so it needs solution contributions!
 
-Things you may want to cover:
+The currently known solutions are in ```data/solutions.txt```. If you have a solution to add,
+please fork this repo, add it to the list, and make a pull request!
 
-* Ruby version
+Here is a guide on how to fork and make a pull request: https://www.digitalocean.com/community/tutorials/how-to-create-a-pull-request-on-github
 
-* System dependencies
+## How to use
+This is a REST API, which basically means you send an HTTP request to check your solution.
 
-* Configuration
+### cURL
+```bash
+# To send the request to check if the solution for Problem 1 is 2.
+curl -X GET 'https://projecteulerapi.herokuapp.com/api/problem/1/check/2'
+# The response is in the JSON format
+# {"status":200,"result":"incorrect","error":null}
+```
 
-* Database creation
+### Ruby
+using the ```HTTParty``` gem
+```ruby
+require 'HTTParty'
+# need to run `gem install HTTParty` if you don't have it already
 
-* Database initialization
+response = HTTParty.get 'https://projecteulerapi.herokuapp.com/api/problem/1/check/2'
+puts response.parsed_response['result']
+#=> incorrect
+```
 
-* How to run the test suite
+### Javascript (Node)
+using the ```axios``` library
+```javascript
+const axios = require('axios')
+// need to run `npm install --save axios` if not already in your project
 
-* Services (job queues, cache servers, search engines, etc.)
+axios.get('https://projecteulerapi.herokuapp.com/api/problem/1/check/2')
+     .then((response) => {
+       console.log(response.data.result)
+     })
+     .catch((error) => {
+       console.log(error)
+     })
+//=> incorrect
+```
 
-* Deployment instructions
+### Elixir
+using the ```HTTPotion``` and ```Poison``` Hex packages
+```elixir
+# requires HTTPotion and Poison to be dependencies in your mix.exs file
 
-* ...
+"https://projecteulerapi.herokuapp.com/api/problem/1/check/2"
+|> HTTPotion.get
+|> Map.get(:body)
+|> Poison.decode!
+|> Map.get("result")
+|> IO.inspect
+
+#=> incorrect
+```
