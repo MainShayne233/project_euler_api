@@ -16,7 +16,7 @@ class Problem < ApplicationRecord
     problem.update_attributes params
   end
 
-  def self.find_by(number:, missing_problems:)
+  def self.find_by(number:, missing_problems: true)
     if missing_problems
       super(number: number) || MissingProblem.new(number: number)
     else
