@@ -77,6 +77,10 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.after_initialize do
-    Problem.import!
+    begin
+      Problem.import!
+    rescue
+      "Failed to import problems"
+    end
   end
 end

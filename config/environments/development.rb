@@ -46,6 +46,10 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.after_initialize do
-    Problem.import!
+    begin
+      Problem.import!
+    rescue
+      "Failed to import problems"
+    end
   end
 end
